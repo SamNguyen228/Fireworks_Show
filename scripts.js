@@ -53,14 +53,13 @@ const SKY_LIGHT_NORMAL = 2;
 const COLOR = {
 	Red: '#ff0043',
 	Red1: '#FF0000',
-	// Green: '#14fc56',
+	Green: '#14fc56',
 	Orange: '# FFA500',
 	Blue: '#1e7fff',
 	Purple: '#e60aff',
 	Gold: '#ffbf36',
 	White: '#ffffff',
-	Gray: '#808080',
-	Cyan: '#00FFFF',
+	Cyan: '#00FFFF'
 };
 
 
@@ -698,26 +697,7 @@ const floralShell = (size=1) => ({
 	starLifeVariation: 0.5,
 	color: Math.random() < 0.65 ? 'random' : (Math.random() < 0.15 ? randomColor() : [randomColor(), randomColor({ notSame: true })]),
 	floral: true
-});
-
-// const floralShell = (size = 1) => ({
-// 	shellSize: size,
-// 	spreadSize: 300 + size * 120,
-// 	starDensity: 0.12,
-// 	starLife: 500 + size * 50,
-// 	starLifeVariation: 0.5,
-// 	color: Math.random() < 0.65 ? 'random' : (Math.random() < 0.15 ? randomColor() : [randomColor(), randomColor({ notSame: true })]),
-// 	floral: true,
-// 	pulsating: { speed: 0.1, maxScale: 1.5 }, // Hiệu ứng nhấp nháy
-// 	movement: { x: Math.random() * 10, y: Math.random() * 10 }, // Di chuyển ngẫu nhiên
-// 	glow: { intensity: Math.random() * 0.5 + 0.5, color: randomColor() }, // Ánh sáng phát ra từ vỏ hoa
-// 	expandContract: { speed: 0.05, minScale: 0.8, maxScale: 1.5 }, // Hiệu ứng nở/co lại
-// 	swirl: { speed: 0.2, direction: Math.random() < 0.5 ? 'clockwise' : 'counterclockwise' }, // Hiệu ứng xoáy
-// 	flash: { frequency: Math.random() * 0.1 + 0.1, duration: Math.random() * 200 + 200 }, // Hiệu ứng nhấp nháy
-// 	starStorm: { intensity: Math.random() * 5 + 5, speed: Math.random() * 0.1 + 0.1 }, // Hiệu ứng bão sao
-// 	bloom: { maxRadius: 300, duration: 1000 } // Hiệu ứng hoa nở
-// });
-  
+});  
   
 const fallingLeavesShell = (size=1) => ({
 	shellSize: size,
@@ -775,73 +755,34 @@ const horsetailShell = (size=1) => {
 	};
 };
 
-const simpleRingShell = (size = 1) => {
-	// Định nghĩa bảng màu
-	const COLOR = {
-	  Red: '#ff0043',
-	  Blue: '#1e7fff',
-	  Purple: '#e60aff',
-	  Gold: '#ffbf36',
-	  White: '#ffffff'
-	};
-  
-	// Chọn màu ngẫu nhiên từ bảng màu
-	const colors = [COLOR.Red, COLOR.Blue, COLOR.Purple, COLOR.Gold];
-	const color = colors[Math.floor(Math.random() * colors.length)];
-  
-	// Ngẫu nhiên chọn có pistil hay không
-	const pistil = Math.random() < 0.75;
-  
-	// Ngẫu nhiên có streamers hay không
-	const streamers = Math.random() < 0.3;
-  
-	// Màu sắc pistil nếu có, nếu không sẽ là trắng
-	const pistilColor = pistil ? (color === COLOR.Gold ? COLOR.White : COLOR.Gold) : COLOR.White;
-  
-	return {
-	  shellSize: size,
-	  ring: true, // Đây là hiệu ứng vòng tròn
-	  color: color, // Màu sắc shell
-	  spreadSize: 300 + size * 100, // Độ lan tỏa của shell
-	  starLife: 1200 + size * 200, // Thời gian sống của các ngôi sao
-	  starCount: 3.2 * Math.PI * (size + 1), // Số lượng ngôi sao
-	  pistil, // Có pistil hay không
-	  pistilColor, // Màu sắc pistil
-	  streamers, // Có streamers hay không
-	  strobe: true,
-	  strobeColor: Math.random() < 0.5 ? COLOR.White : null,
-	};
-};
-
-const crossRingShell = (size=1) => {
-	const color = randomColor({limitWhite: true});
-	const pistil = Math.random() < 0.8;
+const spiralShell = (size = 1) => {
+    const color = randomColor();
+	const pistil = true;
 	return {
 		shellSize: size,
-		ring: true,
+		spiral: true,
 		color,
-		spreadSize: 275 + size * 100,
-		starLife: 900 + size * 200,
-		starCount: 2.2 * PI_2 * (size + 2),
+		spreadSize: 350 + size * 100,
+		starLife: 1200 + size * 350,
+		starCount: 20 * PI_2 * (size + 2),
 		pistil,
 		pistilColor: makePistilColor(color),
 		glitter: !pistil ? 'light' : '',
 		glitterColor: color === COLOR.Gold ? COLOR.Gold : COLOR.White,
-		streamers: Math.random() < 0.75
+		streamers: Math.random() < 0.5
 	};
-	// return Object.assign({}, defaultShell, config);
 };
-  
-const spiralShell = (size = 1) => {
+
+const flowerShell = (size = 1) => {
     const color = randomColor({ limitWhite: true });
     return {
         shellSize: size,
         spreadSize: 250 + size * 100,
-        starDensity: 0.5,
+        starDensity: 0.6,
         starLife: 800 + size * 120,
         starLifeVariation: 0.3,
         color,
-        spiral: true,
+        flower: true,
 		strobe: true,
 		strobeColor: color,
         pistil: Math.random() < 0.5,
@@ -849,23 +790,22 @@ const spiralShell = (size = 1) => {
     };
 };
 
-// Heart Shell: Hiệu ứng trái tim
-const heartShell = (size = 1) => {
-	const color = randomColor({ limitWhite: true });
+const heartCrackleShell = (size = 1) => {
+	const color = COLOR.Red || COLOR.Red1;
+	const pistil = true;
 	return {
 		shellSize: size,
 		spreadSize: 320 + size * 90,
 		starDensity: 0.2,
 		starLife: 700 + size * 140,
-		starLifeVariation: 0.3,
+		starLifeVariation: 0.5,
 		color,
-		heart: true,
+		heartCrackle: true,
 		strobe: true,
-		pistil: Math.random() < 0.6,
-		pistilColor: makePistilColor(color)
+		pistil,
+		pistilColor: makePistilColor(randomColor())
 	};
 };
-
 
 const explosionShell = (size = 1) => {
 	const color = randomColor();
@@ -874,9 +814,9 @@ const explosionShell = (size = 1) => {
 		spreadSize: 250 + size * 80,
 		starDensity: 0.65,
 		starLife: 800 + size * 140,
-		starLifeVariation: 0.6,
+		starLifeVariation: 0.8,
 		color,
-		stars: true,
+		explode: true,
 		strobe: true,
 		pistil: Math.random() < 0.6,
 		pistilColor: makePistilColor(color)
@@ -888,11 +828,12 @@ const strobShell = (size = 1) => {
 	const color = singleColor ? randomColor({ limitWhite: true }) : [randomColor(), randomColor({ notSame: true })];
 	return {
 	  shellSize: size,
-	  spreadSize: 350 + size * 100,
+	  spreadSize: 300 + size * 100,
+	  starCount: size * 120,
 	  starLife: 1500 + size * 200,
 	  starLifeVariation: 0.1,
 	  starDensity: 1.1,
-	  color, 
+	  color: Math.random() < 0.65 ? 'random' : (Math.random() < 0.15 ? randomColor() : [randomColor(), randomColor({ notSame: true })]), 
 	  glitter: 'light',
 	  glitterColor: COLOR.White,
 	  strobe: true,
@@ -902,43 +843,20 @@ const strobShell = (size = 1) => {
 	};
 };
 
-const timeRainShell = (size=1) => {
+const numberShell = (size = 1) => {
 	const color = randomColor({ limitWhite: true });
 	return {
 		shellSize: size,
+		spreadSize: 320 + size * 90,
+		starDensity: 0.15,
+		starLife: 700 + size * 140,
+		starLifeVariation: 1,
 		color,
-		spreadSize: 250 + size * 100,
-		starDensity: 0.8,
-		starLife: 1600 + size * 90,
-		starLifeVariation: 0.8,
-		pistil: Math.random() < 0.5,
-		pistilColor: makePistilColor(color),
-		crackle: true,
+		number: true,
 		strobe: true,
-		strobeColor: Math.random() < 0.5 ? COLOR.White : null
-	}
-}; 
-
-const ghostShellII = (size=1) => {
-	// Extend crysanthemum shell
-	const shell = crysanthemumShell(size);
-	// Ghost effect can be fast, so extend star life
-	shell.starLife *= 1.0;
-	shell.starDensity = 0.6;
-	// Ensure we always have a single color other than white
-	let ghostColor = randomColor({ notColor: COLOR.White });
-	// Always use streamers, and sometimes a pistil
-	shell.streamers = true;
-	const pistil = Math.random() < 0.42;
-	const pistilColor = pistil && makePistilColor(ghostColor);
-	// Ghost effect - transition from invisible to chosen color
-	shell.color = INVISIBLE;
-	shell.secondColor = ghostColor;
-	// We don't want glitter to be spewed by invisible stars, and we don't currently
-	// have a way to transition glitter state. So we'll disable it.
-	shell.glitter = '';
-	shell.crosset = true;
-	return shell;
+		pistil: Math.random() < 0.6,
+		pistilColor: makePistilColor(color)
+	};
 };
 
 const horsetailShellII = (size=1) => {
@@ -950,11 +868,57 @@ const horsetailShellII = (size=1) => {
 		spreadSize: 300 + size * 50,
 		starDensity: 1.5,
 		starLife: 3000 + size * 500,
-		glitter: 'light',
+		glitter: 'heavy',
 		glitterColor: Math.random() < 0.5 ? whiteOrGold() : color,
 		// Add strobe effect to white horsetails, to make them more interesting
 		strobe: true,
-		stars: true
+		explode: true
+	};
+};
+
+const starStormShell = (size=1) => ({
+	shellSize: size,
+	spreadSize: 150 + size * 60,
+	starDensity: 0.2,
+	starLife: 800 + size * 60,
+	starLifeVariation: 0.5,
+	color: Math.random() < 0.65 ? 'random' : (Math.random() < 0.15 ? randomColor() : [randomColor(), randomColor({ notSame: true })]),
+	starstorm: true,
+});
+
+const heartShell = (size=1) => {
+	const color = randomColor();
+	const pistil = Math.random() < 0.75;
+	return {
+		shellSize: size,
+		heart: true,
+		color,
+		spreadSize: 200 + size * 80,
+		starLife: 1000 + size * 200,
+		starLifeVariation: 1,
+		starCount: 10 * PI_2 * (size+1),
+		pistil,
+		pistilColor: makePistilColor(color),
+		glitter: !pistil ? 'light' : '',
+		glitterColor: color === COLOR.Gold ? COLOR.Gold : COLOR.White,
+		streamers: Math.random() < 0.3,
+		strobe: true,
+		strobeColor: Math.random() < 0.5 ? COLOR.White : null,
+	};
+};
+
+const ringShellII = (size = 1) => {
+    const color = randomColor();
+	return {
+		shellSize: size,
+		ring: true,
+		color,
+		spreadSize: 280 + size * 100,
+		starLife: 1000 + size * 350,
+		starCount: 180,
+		pistil: true,
+		gilter: true,
+		streamers: true,
 	};
 };
 
@@ -999,17 +963,18 @@ const shellTypes = {
 	'Horse Tail': horsetailShell,
 	'Palm': palmShell,
 	'Ring': ringShell,
-	'Simple Ring': simpleRingShell, 
 	'Strobe': strobeShell,
 	'Willow': willowShell,
-	'Cross Ring': crossRingShell,
-	'Sprial': spiralShell,
+	'Spiral': spiralShell,
 	'Heart': heartShell,
 	'Explosion': explosionShell,
-    'Strobe II': strobShell,
-	'Time Rain': timeRainShell,
-	'Ghost II': ghostShellII,
+	'Number': numberShell,
+	'Star Storm': starStormShell,
+	'Flower': flowerShell,
+	'Heart II': heartCrackleShell,
+    	'Strobe II': strobShell,
 	'Horse Tail II': horsetailShellII,
+	'Ring II': ringShellII
 };
 
 const shellNames = Object.keys(shellTypes);
@@ -1271,7 +1236,6 @@ function seqSmallBarrage() {
 seqSmallBarrage.cooldown = 15000;
 seqSmallBarrage.lastCalled = Date.now();
 
-
 const sequences = [
 	seqRandomShell,
 	seqTwoRandom,
@@ -1284,98 +1248,50 @@ const sequences = [
 let isFirstSeq = true;
 const finaleCount = 32;
 let currentFinaleCount = 0;
-// function startSequence() {
-// 	if (isFirstSeq) {
-// 		isFirstSeq = false;
-// 		if (IS_HEADER) {
-// 			return seqTwoRandom();
-// 		}
-// 		else {
-// 			const shell = new Shell(crysanthemumShell(shellSizeSelector()));
-// 			shell.launch(0.5, 0.5);
-// 			return 2400;
-// 		}
-// 	}
-	
-// 	if (finaleSelector()) {
-// 		seqRandomFastShell();
-// 		if (currentFinaleCount < finaleCount) {
-// 			currentFinaleCount++;
-// 			return 170;
-// 		}
-// 		else {
-// 			currentFinaleCount = 0;
-// 			return 6000;
-// 		}
-// 	}
-	
-// 	const rand = Math.random();
-	
-// 	if (rand < 0.08 && Date.now() - seqSmallBarrage.lastCalled > seqSmallBarrage.cooldown) {
-// 		return seqSmallBarrage();
-// 	}
-	
-// 	if (rand < 0.1) {
-// 		return seqPyramid();
-// 	}
-	
-// 	if (rand < 0.6 && !IS_HEADER) {
-// 		return seqRandomShell();
-// 	}
-// 	else if (rand < 0.8) {
-// 		return seqTwoRandom();
-// 	}
-// 	else if (rand < 1) {
-// 		return seqTriple();
-// 	}
-// }
-
 function startSequence() {
-    if (isFirstSeq) {
-        isFirstSeq = false;
-        if (IS_HEADER) {
-            return seqTwoRandom();
-        } else {
-            const shell = new Shell(crysanthemumShell(shellSizeSelector()));
-            shell.launch(0.5, 0.5);
-            return 100; // Giảm thời gian giữa lần bắn đầu tiên và tiếp theo
-        }
-    }
-
-    if (finaleSelector()) {
-        // Bắn pháo hoa liên tục trong chế độ "finale"
-        for (let i = 0; i < 3; i++) { // Bắn 3 pháo hoa cùng lúc
-            seqRandomFastShell();
-        }
-        if (currentFinaleCount < finaleCount) {
-            currentFinaleCount++;
-            return 450; // Giảm thời gian giữa các lần bắn trong chế độ finale
-        } else {
-            currentFinaleCount = 0;
-            return 500; // Giãn thời gian trước khi kết thúc finale
-        }
-    }
-
-    const rand = Math.random();
-
-    if (rand < 0.08 && Date.now() - seqSmallBarrage.lastCalled > seqSmallBarrage.cooldown) {
-        return seqSmallBarrage();
-    }
-
-    if (rand < 0.1) {
-        return seqPyramid();
-    }
-
-    if (rand < 0.6 && !IS_HEADER) {
-        // Tăng số lượng pháo hoa
-        seqRandomShell();
-        seqTwoRandom();
-        return 500; // Giảm thời gian giữa các lần bắn
-    } else if (rand < 0.8) {
-        return seqTwoRandom();
-    } else if (rand < 1) {
-        return seqTriple();
-    }
+	if (isFirstSeq) {
+		isFirstSeq = false;
+		if (IS_HEADER) {
+			return seqTwoRandom();
+		}
+		else {
+			const shell = new Shell(crysanthemumShell(shellSizeSelector()));
+			shell.launch(0.5, 0.5);
+			return 2400;
+		}
+	}
+	
+	if (finaleSelector()) {
+		seqRandomFastShell();
+		if (currentFinaleCount < finaleCount) {
+			currentFinaleCount++;
+			return 200;
+		}
+		else {
+			currentFinaleCount = 0;
+			return 170;
+		}
+	}
+	
+	const rand = Math.random();
+	
+	if (rand < 0.08 && Date.now() - seqSmallBarrage.lastCalled > seqSmallBarrage.cooldown) {
+		return seqSmallBarrage();
+	}
+	
+	if (rand < 0.1) {
+		return seqPyramid();
+	}
+	
+	if (rand < 0.6 && !IS_HEADER) {
+		return seqRandomShell();
+	}
+	else if (rand < 0.8) {
+		return seqTwoRandom();
+	}
+	else if (rand < 1) {
+		return seqTriple();
+	}
 }
 
 
@@ -1895,64 +1811,60 @@ function crackleEffect(star) {
 			angle,
 			// apply near cubic falloff to speed (places more particles towards outside)
 			Math.pow(Math.random(), 0.45) * 2.4,
-			300 + Math.random() * 200
+			600 + Math.random() * 300
 		);
 	});
 }
 
-// Spiral effect creates a spiral of stars
-function spiralEffect(star) {
-	const spiralCount = 36; // Số lượng sao trong xoắn ốc
-    const angleIncrement = (2 * Math.PI) / spiralCount;
+// Flower effect creates a flowers shape of stars
+function flowerEffect(star) {
+	const flowerCount = 36; 
+    const angleIncrement = (2 * Math.PI) / flowerCount;
 	let angle = 0;
 
-    createParticleArc(0, Math.PI * 2, spiralCount, 0.1, (angle) => {
+    createParticleArc(0, Math.PI * 2, flowerCount, 0.1, (angle) => {
 		Star.add(
 			star.x,
 			star.y,
 			star.color,
 			angle,
-			1.5 + Math.random() * 0.5, // Tốc độ
-			800 + Math.random() * 200 // Thời gian sống
+			1.5 + Math.random() * 0.5,
+			1100 + Math.random() * 400 
 		)
 	});
 }
 
 // Heart effect creates a heart shape of stars
 function heartEffect(star) {
-    const heartSize = 5; // Kích thước của trái tim
+    const heartSize = 5;
     const heartPoints = [];
 
-    // Tạo các điểm của hình trái tim
     for (let t = 0; t < Math.PI * 2; t += 0.1) {
         const x = heartSize * 16 * Math.sin(t) ** 3;
         const y = -heartSize * (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
         heartPoints.push({ x, y });
     }
 
-    // Duyệt qua các điểm và tạo ngôi sao ở các vị trí đó
     heartPoints.forEach(({ x, y }) => {
-        const angle = Math.random() * 2 * Math.PI; // Chọn ngẫu nhiên hướng đi của ngôi sao
-        const speed = 1.5 + Math.random() * 0.5; // Tốc độ ngẫu nhiên
-        const starLife = 800 + Math.random() * 200; // Thời gian sống của ngôi sao
+        const angle = Math.random() * 2 * Math.PI; 
+        const speed = 1.5 + Math.random() * 0.5; 
+        const starLife = 800 + Math.random() * 200; 
 
-        // Tạo ngôi sao với các thông số trên
         Star.add(
-            star.x + x, // Vị trí ngôi sao trên trục x (thêm x của trái tim)
-            star.y + y, // Vị trí ngôi sao trên trục y (thêm y của trái tim)
-            star.color, // Màu sắc của ngôi sao
-            angle, // Hướng đi của ngôi sao
-            speed, // Tốc độ của ngôi sao
-            starLife // Thời gian sống của ngôi sao
+            star.x + x,
+            star.y + y, 
+            star.color, 
+            angle, 
+            speed,
+            starLife
         );
     });
 
-    // Thêm hiệu ứng ánh sáng tại vị trí của ngôi sao
-    BurstFlash.add(star.x, star.y, 46); // Ánh sáng bùng nổ
-    soundManager.playSound('burstSmall'); // Phát âm thanh khi nổ
+    BurstFlash.add(star.x, star.y, 46); 
+    soundManager.playSound('burstSmall');
 }
 
-function starEffect(star) {
+function explodeEffect(star) {
     createBurst(7, (angle, speedMult) => {
 		Star.add(
 			star.x,
@@ -1970,7 +1882,75 @@ function starEffect(star) {
 	soundManager.playSound('burstSmall');
 }
 
+// Effect to create a single large "2025" line
+function number2025Effect(star) {
+    const numberSize = 10;
+    const letterSpacing = 6; 
+    const numberPoints = [];
+    const numberMatrix = [
+        "######      #####     ######     ###### ",
+        "     #     #     #         #     #      ",
+        "     #     #     #         #     #      ",
+        "######     #     #    ######     ###### ",
+        "#          #     #    #               # ",
+        "#          #     #    #               # ",
+        "######      #####     ######     ###### ",
+    ];
 
+    numberMatrix.forEach((row, rowIndex) => {
+        for (let colIndex = 0; colIndex < row.length; colIndex++) {
+            if (row[colIndex] === "#") {
+                const x = colIndex * numberSize + letterSpacing * Math.floor(colIndex / 5); 
+                const y = rowIndex * numberSize;
+                numberPoints.push({ x, y });
+            }
+        }
+    });
+
+    numberPoints.forEach(({ x, y }) => {
+        const angle = Math.random() * 2 * Math.PI;
+        const speed = 0.5 + Math.random() * 0.2; 
+        const starLife = 1000 + Math.random() * 200; 
+
+        Star.add(
+            star.x + x - 150, 
+            star.y + y - 50, 
+            star.color, 
+            angle, 
+            speed, 
+            starLife 
+        );
+    });
+    BurstFlash.add(star.x, star.y, 100); 
+    soundManager.playSound('burstSmall'); 
+}
+
+function starStormEffect(star) {
+    const count = 8 + 4 * quality;
+    createBurst(count, (angle, speedMult) => {
+        const randomAngle = angle + (Math.random() * 360); 
+        const randomSpeed = speedMult * (1 + Math.random() * 2); 
+        Star.add(
+            star.x,
+            star.y,
+            star.color,
+            randomAngle,
+            randomSpeed * 2.4,
+            1200 + Math.random() * 300, 
+            star.speedX + Math.random() * 2, 
+            star.speedY + Math.random() * 2, 
+            0.2 + Math.random() * 0.2
+        );
+    });
+
+    BurstFlash.add(star.x, star.y, 46);
+    soundManager.playSound('burst');
+}
+
+var audio = new Audio('/TẾT BÌNH AN REMIX.mp3');
+audio.volume = 0.3;
+audio.loop = true;
+audio.play();
 
 /**
  * Shell can be constructed with options:
@@ -2061,6 +2041,7 @@ class Shell {
 		
 		comet.onDeath = comet => this.burst(comet.x, comet.y);
 		soundManager.playSound('lift');
+		audio.play();
 	}
 	
 	burst(x, y) {
@@ -2086,34 +2067,29 @@ class Shell {
 			}
 			crackleEffect(star);
 		}
-		/////////////////////////////////////////////////////////
-		// Thêm hiệu ứng Spiral
-		if (this.spiral) onDeath = (star) => {
+		if (this.flower) onDeath = (star) => {
 			if (!playedDeathSound) {
-				soundManager.playSound('crackleSmall');
+				soundManager.playSound('crackle');
 				playedDeathSound = true;
 			}
-			spiralEffect(star);
+			flowerEffect(star);
 		}
-		
-		// Thêm hiệu ứng Heart
-		if (this.heart) onDeath = (star) => {
+		if (this.heartCrackle) onDeath = (star) => {
 			if (!playedDeathSound) {
-				soundManager.playSound('crackle'); 
+				soundManager.playSound('crackleSmall'); 
 				playedDeathSound = true;
 			}
 			heartEffect(star);
 		}
-
-		// Thêm hiệu ứng Star
-		if (this.stars) onDeath = (star) => {
+		if (this.explode) onDeath = (star) => {
 			if (!playedDeathSound) {
 				soundManager.playSound('burst'); 
 				playedDeathSound = true;
 			}
-			starEffect(star);
+			explodeEffect(star);
 		}
-		////////////////////////////////////////////////////////////////////////////////
+		if(this.number) onDeath = number2025Effect;
+		if (this.starstorm) onDeath = starStormEffect;
 		if (this.floral) onDeath = floralEffect;
 		if (this.fallingLeaves) onDeath = fallingLeavesEffect;
 		
@@ -2136,10 +2112,10 @@ class Shell {
 			sparkLifeVariation = 2;
 		}
 		else if (this.glitter === 'thick') {
-			sparkFreq = 16;
-			sparkSpeed = isHighQuality ? 1.65 : 1.5;
+			sparkFreq = 12;
+			sparkSpeed = isHighQuality ? 1.8 : 1.6;
 			sparkLife = 1400;
-			sparkLifeVariation = 3;
+			sparkLifeVariation = 4;
 		}
 		else if (this.glitter === 'streamer') {
 			sparkFreq = 32;
@@ -2213,6 +2189,62 @@ class Shell {
 				color = this.color;
 			}
 			
+			if (this.heart) {
+				const heartScale = 0.08; 
+			
+				createParticleArc(0, PI_2, this.starCount, 0, angle => {
+					const t = angle; 
+					const xHeart = 16 * Math.pow(Math.sin(t), 3);
+					const yHeart = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+			
+					const initSpeedX = -yHeart * heartScale * speed; 
+					const initSpeedY = -xHeart * heartScale * speed; 
+			
+					const star = Star.add(
+						x,
+						y,
+						color,
+						Math.atan2(initSpeedY, initSpeedX),
+						MyMath.pointDist(0, 0, initSpeedX, initSpeedY),
+						this.starLife + Math.random() * this.starLife * this.starLifeVariation
+					);
+				});
+			}	
+
+			if (this.spiral) {
+				const spiralTurns = 3; 
+				const spiralSpread = 0.3; 
+				const angleOffset = Math.random() * Math.PI;
+				const createSpiral = () => {
+					createParticleArc(0, PI_2 * spiralTurns, this.starCount, 0, angle => {
+						const radius = angle * spiralSpread; 
+						const initSpeedX = Math.sin(angle + angleOffset) * radius; 
+						const initSpeedY = Math.cos(angle + angleOffset) * radius; 
+						const newSpeed = MyMath.pointDist(0, 0, initSpeedX, initSpeedY); 
+						const newAngle = MyMath.pointAngle(0, 0, initSpeedX, initSpeedY); 
+
+						const star = Star.add(
+							x,
+							y,
+							color,
+							newAngle,
+							newSpeed,
+							this.starLife + Math.random() * this.starLife * this.starLifeVariation
+						);
+
+						if (this.glitter) {
+							star.sparkFreq = sparkFreq; 
+							star.sparkSpeed = sparkSpeed; 
+							star.sparkLife = sparkLife; 
+							star.sparkLifeVariation = sparkLifeVariation; 
+							star.sparkColor = this.glitterColor; 
+							star.sparkTimer = Math.random() * star.sparkFreq; 
+						}
+					});
+				};
+				createSpiral();
+			}	
+			
 			// Rings have positional randomness, but are rotated randomly
 			if (this.ring) {
 				const ringStartAngle = Math.random() * Math.PI;
@@ -2245,7 +2277,8 @@ class Shell {
 						star.sparkTimer = Math.random() * star.sparkFreq;
 					}
 				});
-			}
+			}	
+			
 			// Normal burst
 			else {
 				createBurst(this.starCount, starFactory);
