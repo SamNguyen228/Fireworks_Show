@@ -376,12 +376,9 @@
             transition-duration: 0.4s;
   }
 
-  #new-year-message {
-    background-color: #111;
-    padding: 20px;
-    border-radius: 40px;
+#new-year-message {
     position: absolute;
-    top: 95%;
+    top: 92%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 2.5rem;
@@ -395,6 +392,14 @@
     z-index: 100; 
     pointer-events: none; 
     text-align: center;
+}
+
+@media (max-width: 840px) {
+  #new-year-message {
+    font-size: 1.5rem;
+    padding: 5px;
+    border-radius: 10px;
+  }
 }
 
 @keyframes blink-shadow {
@@ -412,11 +417,5 @@
     }
 }
 
-@media (max-width: 840px) {
-  #new-year-message {
-    font-size: 1.5rem;
-    padding: 5px;
-    border-radius: 10px;
-  }
-}
+
 
