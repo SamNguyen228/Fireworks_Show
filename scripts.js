@@ -1947,7 +1947,7 @@ function starStormEffect(star) {
     soundManager.playSound('burst');
 }
 
-var audio = new Audio('./TẾT BÌNH AN REMIX.mp3');
+var audio = new Audio('./TetBinhAnRemix.mp3');
 audio.volume = 0.3;
 audio.loop = true;
 audio.play();
