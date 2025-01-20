@@ -6,7 +6,7 @@
   <meta name="description" content="Hiệu ứng chữ chạy từ trái sang phải và bay lên với CSS">
   <title>Happy new year</title>
   <link rel="stylesheet" href="./CSS/style1.css">
-  <link rel="icon" href="https://img.freepik.com/premium-photo/happy-new-year-2025-ai-generated-logos_1277069-14431.jpg" />
+  <link rel="shortcut icon" type="image/png" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/firework-burst-icon-v2.png">
 </head>
 <body>
   <br>
@@ -22,9 +22,20 @@
       style="left: 600px; width: 200px; height: 100px;  top: 98px;">
   </div>
   <div class="dragon"></div>
-  <button><a href="./fireworks.html">XEM PHÁO HOA</a></button>
+  <button id="fireworks-button"><a href="./fireworks.html">XEM PHÁO HOA</a></button>
   <!-- Add this canvas element -->
   <canvas id="canvas"></canvas>
   <script src="./JS/script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const button = document.querySelector("button");
+      // Disable the button
+      button.disabled = true;
+      // Re-enable the button after 5 seconds
+      setTimeout(() => {
+        button.disabled = false;
+      }, 10000);
+    });
+  </script>  
 </body>
 </html>
