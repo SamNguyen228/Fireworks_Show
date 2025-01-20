@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('/Image/2.jpg'); 
+  background-image: url('./Image/2.jpg'); 
   background-size: cover; 
   background-position: center;
   background-repeat: no-repeat;
@@ -110,7 +110,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url("/Image/9.png");
+  background-image: url("./Image/9.png");
   background-size: contain;
   background-repeat: no-repeat;
   width: 600px; 
