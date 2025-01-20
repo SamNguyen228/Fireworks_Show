@@ -951,7 +951,7 @@ const crackleShellII = (size=1) => {
 	return {
 		shellSize: size,
 		spreadSize: 380 + size * 75,
-		starDensity: isLowQuality ? 0.65 : 1,
+		starDensity: 0.65,
 		starLife: 600 + size * 100,
 		starLifeVariation: 0.32,
 		glitter: 'light',
