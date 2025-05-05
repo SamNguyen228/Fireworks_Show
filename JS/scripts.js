@@ -825,21 +825,6 @@ const strobShell = (size = 1) => {
 	};
 };
 
-const numberShell = (size = 1) => {
-	const color = randomColor({ limitWhite: true });
-	return {
-		shellSize: size,
-		spreadSize: 320 + size * 90,
-		starDensity: 0.15,
-		starLife: 700 + size * 140,
-		starLifeVariation: 1,
-		color,
-		number: true,
-		strobe: true,
-		pistil: Math.random() < 0.6,
-		pistilColor: makePistilColor(color)
-	};
-};
 
 const horsetailShellII = (size=1) => {
 	const color = randomColor();
@@ -1008,13 +993,12 @@ const shellTypes = {
 	'Willow': willowShell,
 	'Heart': heartShell,
 	'Explosion': explosionShell,
-	'Number': numberShell,
 	'Star Storm': starStormShell,
 	'Flower': flowerShell,
 	'Star': starShell,
 	'Color': colorShell,
 	'Heart II': heartCrackleShell,
-    'Strobe II': strobShell,
+    	'Strobe II': strobShell,
 	'Horse Tail II': horsetailShellII,
 	'Ring II': ringShellII,
 	'Crackle II': crackleShellII
@@ -1925,49 +1909,6 @@ function explodeEffect(star) {
 	soundManager.playSound('burstSmall');
 }
 
-// Effect to create a single large "2025" line
-function number2025Effect(star) {
-    const numberSize = 10;
-    const letterSpacing = 6; 
-    const numberPoints = [];
-    const numberMatrix = [
-        "######      #####     ######     ###### ",
-        "     #     #     #         #     #      ",
-        "     #     #     #         #     #      ",
-        "######     #     #    ######     ###### ",
-        "#          #     #    #               # ",
-        "#          #     #    #               # ",
-        "######      #####     ######     ###### ",
-    ];
-
-    numberMatrix.forEach((row, rowIndex) => {
-        for (let colIndex = 0; colIndex < row.length; colIndex++) {
-            if (row[colIndex] === "#") {
-                const x = colIndex * numberSize + letterSpacing * Math.floor(colIndex / 5); 
-                const y = rowIndex * numberSize;
-                numberPoints.push({ x, y });
-            }
-        }
-    });
-
-    numberPoints.forEach(({ x, y }) => {
-        const angle = Math.random() * 2 * Math.PI;
-        const speed = 0.5 + Math.random() * 0.2; 
-        const starLife = 1000 + Math.random() * 200; 
-
-        Star.add(
-            star.x + x - 150, 
-            star.y + y - 50, 
-            star.color, 
-            angle, 
-            speed, 
-            starLife 
-        );
-    });
-    BurstFlash.add(star.x, star.y, 100); 
-    soundManager.playSound('burstSmall'); 
-}
-
 function starStormEffect(star) {
     const count = 8 + 4 * quality;
     createBurst(count, (angle, speedMult) => {
@@ -2181,7 +2122,6 @@ class Shell {
 			radiantBurstEffect(star)
 		}
 		if(this.blooming) onDeath = bloomingFlowerEffect;
-		if(this.number) onDeath = number2025Effect;
 		if (this.starstorm) onDeath = starStormEffect;
 		if (this.floral) onDeath = floralEffect;
 		if (this.fallingLeaves) onDeath = fallingLeavesEffect;
