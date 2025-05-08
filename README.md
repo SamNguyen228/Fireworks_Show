@@ -21,7 +21,7 @@ Live server here: <a href="https://samnguyen228.github.io/Fireworks_Show">Firewo
 ## 🖱️ How to Run
 Clone the repo:
 
-<code>git clone [https://github.com/your-username/firework-show.git](https://github.com/SamNguyen228/Fireworks_Show)</code>
+<code>git clone https://github.com/SamNguyen228/Fireworks_Show</code>
 
 Open index.html in your browser.
 
