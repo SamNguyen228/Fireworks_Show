@@ -1,21 +1,22 @@
 ## 🎆 Firework Show
 A stunning 3D fireworks show built. This project creates an immersive celebration experience directly in your browser with realistic particle animations, lighting effects, and camera motion.
+Live server here: <a href="https://samnguyen228.github.io/Fireworks_Show">FireworksShow</a>
 
-🔧 Technologies Used
-HTML5 & CSS3 
+## 🔧 Technologies Used
+- HTML5 & CSS3 
 
-JavaScript 
+- JavaScript 
 
-Three.js 
+- Three.js 
 
 ## 🚀 Features
-Colorful, animated fireworks exploding in a dynamic 3D space
+- Colorful, animated fireworks exploding in a dynamic 3D space
 
-Real-time rendering with smooth performance
+- Real-time rendering with smooth performance
 
-Responsive design — runs on desktop and mobile
+- Responsive design — runs on desktop and mobile
 
-Easily extendable for interactive shows or events
+- Easily extendable for interactive shows or events
 
 ## 🖱️ How to Run
 Clone the repo:
@@ -26,5 +27,4 @@ Open index.html in your browser.
 
 ## 📸 Preview
 ![image](https://github.com/user-attachments/assets/8ca91baa-8b4c-427e-be67-0edd6287e04f)
-Live server here: 
 
